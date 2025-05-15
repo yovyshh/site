@@ -1,5 +1,13 @@
-# Firebase Studio
+# About Me
 
-This is a NextJS starter in Firebase Studio.
+I am a passionate video editor with a strong desire to create compelling visual narratives. I thrive on bringing stories to life through skillful editing and creative techniques.
 
-To get started, take a look at src/app/page.tsx.
+## Skills
+
+*   Video Editing Software (e.g., Adobe Premiere Pro, Final Cut Pro)
+*   Color Grading
+*   Sound Design and Mixing
+*   Motion Graphics
+*   Storytelling and Narrative Structure
+*   Problem-Solving
+*   Attention to Detail

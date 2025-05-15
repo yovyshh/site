@@ -62,15 +62,15 @@ export const DESKTOP_ITEMS: ProjectItem[] = [
     category: 'System',
     longDescription: `
       <h2 class="text-lg font-bold mb-2">Hello! I'm [Your Name/RetroSite Creator]</h2>
-      <p class="mb-2">I am a passionate developer and designer with a love for all things retro and modern technology.</p>
-      <p class="mb-2">This portfolio is a testament to that passion, blending the nostalgic charm of Windows 98 with a showcase of my capabilities in creating engaging user experiences.</p>
+      <p class="mb-2">I am a passionate video editor with a keen eye for detail and a love for storytelling through visuals.</p>
+      <p class="mb-2">This portfolio is a showcase of my work, demonstrating my ability to transform raw footage into compelling narratives and engaging content.</p>
       <h3 class="text-md font-bold mt-4 mb-1">Skills:</h3>
       <ul class="list-disc list-inside mb-2">
-        <li>Next.js, React, TypeScript</li>
-        <li>Tailwind CSS, ShadCN UI</li>
-        <li>Node.js, Firebase</li>
-        <li>UI/UX Design</li>
-        <li>Pixel Art & Retro Aesthetics</li>
+        <li>Video Editing (e.g., Adobe Premiere Pro, Final Cut Pro)</li>
+        <li>Color Grading & Correction</li>
+        <li>Motion Graphics & Visual Effects (e.g., After Effects)</li>
+        <li>Sound Design & Mixing</li>
+        <li>Storyboarding & Narrative Structure</li>
       </ul>
       <p>Feel free to explore my projects and get in touch!</p>
     `,
