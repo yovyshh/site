@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect, useCallback, type ReactNode } from 'react';
@@ -11,6 +12,7 @@ import { Taskbar } from '@/components/retro-ui/Taskbar';
 import { StartMenu } from '@/components/retro-ui/StartMenu';
 import { DESKTOP_ITEMS, findDesktopItemById, type ProjectItem } from '@/constants/projects';
 import { Button } from '@/components/ui/button'; // For project links if needed
+import { AnimatedFace } from '@/components/AnimatedFace'; // Import the new component
 
 // Extended Window State
 interface WindowState extends SystemWindowProps {
@@ -43,7 +45,7 @@ export default function HomePage() {
     // If window for this item already exists, just bring to front and ensure it's not minimized
     const existingWindowIndex = windows.findIndex(w => w.item.id === itemId);
     if (existingWindowIndex !== -1) {
-      setWindows(prev => prev.map((w, index) => 
+      setWindows(prev => prev.map((w, index) =>
         index === existingWindowIndex ? { ...w, isOpen: true, isMinimized: false, isMinimizedNotTaskbar: false, zIndex: nextZIndex } : w
       ));
       setActiveWindowId(itemId);
@@ -112,7 +114,7 @@ export default function HomePage() {
       setActiveWindowId(otherOpenWindows.length > 0 ? otherOpenWindows[0].id : null);
     }
   };
-  
+
   const handleMinimizeWindow = (id: string) => {
     setWindows(prev => prev.map(w => w.id === id ? { ...w, isMinimized: true, isMinimizedNotTaskbar: true } : w));
      if (activeWindowId === id) {
@@ -140,7 +142,7 @@ export default function HomePage() {
     setSelectedDesktopIconId(id);
     if (isStartMenuOpen) setIsStartMenuOpen(false);
   };
-  
+
   const handleTaskbarItemClick = (id: string) => {
     const window = windows.find(w => w.id === id);
     if (window) {
@@ -177,6 +179,11 @@ export default function HomePage() {
     <div className="h-screen w-screen bg-background text-foreground overflow-hidden flex flex-col relative" onClick={handleDesktopClick}>
       {/* Desktop Area */}
       <main className="flex-grow relative p-4" style={{height: 'calc(100vh - 40px)'}}>
+        {/* Centered Face Animation */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+          <AnimatedFace />
+        </div>
+
         {desktopIconLayout.map(({ id, x, y }) => {
           const item = DESKTOP_ITEMS.find(dItem => dItem.id === id);
           if (!item) return null;
@@ -201,9 +208,9 @@ export default function HomePage() {
       </main>
 
       <StartMenu isOpen={isStartMenuOpen} onClose={() => setIsStartMenuOpen(false)} onMenuItemClick={handleStartMenuItemClick} />
-      <Taskbar 
-        onStartClick={toggleStartMenu} 
-        windows={windows} 
+      <Taskbar
+        onStartClick={toggleStartMenu}
+        windows={windows}
         onTaskbarItemClick={handleTaskbarItemClick}
         activeWindowId={activeWindowId}
       />
@@ -217,7 +224,7 @@ function ProjectWindowContent({ item }: { item: ProjectItem }) {
     <div className="p-4 text-sm">
       <h1 className="text-xl font-bold mb-2 text-primary">{item.name}</h1>
       {item.description && <p className="mb-4 text-muted-foreground">{item.description}</p>}
-      
+
       {item.longDescription && (
          <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: item.longDescription }} />
       )}
@@ -238,7 +245,7 @@ function ProjectWindowContent({ item }: { item: ProjectItem }) {
           ))}
         </div>
       )}
-      
+
       <div className="mt-6 flex space-x-4">
         {item.url && item.type === 'project' && (
           <Link href={item.url} target="_blank" rel="noopener noreferrer" passHref legacyBehavior>
@@ -254,3 +261,4 @@ function ProjectWindowContent({ item }: { item: ProjectItem }) {
     </div>
   );
 }
+
