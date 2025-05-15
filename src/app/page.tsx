@@ -12,7 +12,7 @@ import { Taskbar } from '@/components/retro-ui/Taskbar';
 import { StartMenu } from '@/components/retro-ui/StartMenu';
 import { DESKTOP_ITEMS, findDesktopItemById, type ProjectItem } from '@/constants/projects';
 import { Button } from '@/components/ui/button'; // For project links if needed
-import { AnimatedFace } from '@/components/AnimatedFace'; // Import the new component
+import { AnimatedFace } from '@/components/AnimatedFace';
 
 // Extended Window State
 interface WindowState extends SystemWindowProps {
@@ -42,7 +42,6 @@ export default function HomePage() {
     const itemToOpen = findDesktopItemById(itemId);
     if (!itemToOpen) return;
 
-    // If window for this item already exists, just bring to front and ensure it's not minimized
     const existingWindowIndex = windows.findIndex(w => w.item.id === itemId);
     if (existingWindowIndex !== -1) {
       setWindows(prev => prev.map((w, index) =>
@@ -53,7 +52,6 @@ export default function HomePage() {
       return;
     }
 
-    // Define initial position, potentially offset from parent or default
     const initialX = parentPosition ? parentPosition.x + 30 : Math.random() * 200 + 50;
     const initialY = parentPosition ? parentPosition.y + 30 : Math.random() * 100 + 50;
 
@@ -69,13 +67,13 @@ export default function HomePage() {
               key={subItem.id}
               icon={subItem.icon}
               name={subItem.name}
-              className="!static w-full text-xs" // Override absolute for in-window icons
+              className="!static w-full text-xs" 
               onDoubleClick={() => openWindow(subItem.id, {x: initialX, y: initialY})}
             />
           ))}
         </div>
       );
-    } else if (itemToOpen.url && itemToOpen.type !== 'project') { // For shortcuts like AI insights
+    } else if (itemToOpen.url && itemToOpen.type !== 'project') { 
         router.push(itemToOpen.url);
         return;
     } else {
@@ -83,7 +81,7 @@ export default function HomePage() {
     }
 
     const newWindow: WindowState = {
-      id: itemId, // Use item id for window id to link them
+      id: itemId, 
       title: windowTitle,
       children: content,
       isOpen: true,
@@ -102,14 +100,13 @@ export default function HomePage() {
     setWindows(prev => [...prev, newWindow]);
     setActiveWindowId(itemId);
     setNextZIndex(prev => prev + 1);
-    setIsStartMenuOpen(false); // Close start menu if open
+    setIsStartMenuOpen(false); 
   }, [windows, nextZIndex, router]);
 
 
   const handleCloseWindow = (id: string) => {
     setWindows(prev => prev.map(w => w.id === id ? {...w, isOpen: false} : w));
     if (activeWindowId === id) {
-      // Find next highest zIndex window to activate
       const otherOpenWindows = windows.filter(w => w.isOpen && w.id !== id).sort((a,b) => (b.zIndex ?? 0) - (a.zIndex ?? 0));
       setActiveWindowId(otherOpenWindows.length > 0 ? otherOpenWindows[0].id : null);
     }
@@ -130,7 +127,7 @@ export default function HomePage() {
 
   const toggleStartMenu = () => {
     setIsStartMenuOpen(prev => !prev);
-    if (!isStartMenuOpen) setSelectedDesktopIconId(null); // Deselect icons when opening start menu
+    if (!isStartMenuOpen) setSelectedDesktopIconId(null); 
   };
 
   const handleDesktopClick = () => {
@@ -147,12 +144,10 @@ export default function HomePage() {
     const window = windows.find(w => w.id === id);
     if (window) {
       if (window.isMinimizedNotTaskbar || activeWindowId !== id) {
-        // Restore or bring to front
         setWindows(prev => prev.map(w => w.id === id ? { ...w, isMinimized: false, isMinimizedNotTaskbar: false, zIndex: nextZIndex } : w));
         setActiveWindowId(id);
         setNextZIndex(prev => prev + 1);
       } else {
-        // Minimize if it's already active
         handleMinimizeWindow(id);
       }
     }
@@ -165,10 +160,8 @@ export default function HomePage() {
     } else if (action === 'openAboutWindow') {
       openWindow('about-me');
     }
-    // Add more actions as needed
   };
 
-  // Desktop icon positions
   const desktopIconLayout = [
     { id: 'projects-folder', x: 20, y: 20 },
     { id: 'about-me', x: 20, y: 120 },
@@ -177,13 +170,11 @@ export default function HomePage() {
 
   return (
     <div className="h-screen w-screen bg-background text-foreground overflow-hidden flex flex-col relative" onClick={handleDesktopClick}>
+      
+      <AnimatedFace /> {/* Render self-contained AnimatedFace */}
+
       {/* Desktop Area */}
       <main className="flex-grow relative p-4" style={{height: 'calc(100vh - 40px)'}}>
-        {/* Centered Face Animation */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-          <AnimatedFace />
-        </div>
-
         {desktopIconLayout.map(({ id, x, y }) => {
           const item = DESKTOP_ITEMS.find(dItem => dItem.id === id);
           if (!item) return null;
@@ -201,7 +192,6 @@ export default function HomePage() {
           );
         })}
 
-        {/* Render Windows */}
         {windows.map(win => (
           <SystemWindow key={win.id} {...win} />
         ))}
@@ -218,7 +208,6 @@ export default function HomePage() {
   );
 }
 
-// Component to display project content within a window
 function ProjectWindowContent({ item }: { item: ProjectItem }) {
   return (
     <div className="p-4 text-sm">
@@ -261,4 +250,3 @@ function ProjectWindowContent({ item }: { item: ProjectItem }) {
     </div>
   );
 }
-
