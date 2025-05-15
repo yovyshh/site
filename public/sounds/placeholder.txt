@@ -1,0 +1,10 @@
+This directory is intended for sound files.
+
+To enable click sounds in the application, please:
+1. Create or find a click sound effect (e.g., a short '.mp3' file).
+2. Name this file 'click.mp3'.
+3. Place it in this 'public/sounds/' directory.
+
+The application will then automatically use '/sounds/click.mp3' for button clicks.
+You can find free sound effects on websites like freesound.org or similar.
+Ensure the sound is web-friendly and not too large for quick loading.
