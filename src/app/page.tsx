@@ -12,7 +12,7 @@ import { Taskbar } from '@/components/retro-ui/Taskbar';
 import { StartMenu } from '@/components/retro-ui/StartMenu';
 import { DESKTOP_ITEMS, findDesktopItemById, type ProjectItem } from '@/constants/projects';
 import { Button } from '@/components/ui/button'; // For project links if needed
-import { AnimatedFace } from '@/components/AnimatedFace';
+// Removed AnimatedFace import as it's now handled by loading.tsx
 
 // Extended Window State
 interface WindowState extends SystemWindowProps {
@@ -67,13 +67,13 @@ export default function HomePage() {
               key={subItem.id}
               icon={subItem.icon}
               name={subItem.name}
-              className="!static w-full text-xs" 
+              className="!static w-full text-xs"
               onDoubleClick={() => openWindow(subItem.id, {x: initialX, y: initialY})}
             />
           ))}
         </div>
       );
-    } else if (itemToOpen.url && itemToOpen.type !== 'project') { 
+    } else if (itemToOpen.url && itemToOpen.type !== 'project') {
         router.push(itemToOpen.url);
         return;
     } else {
@@ -81,7 +81,7 @@ export default function HomePage() {
     }
 
     const newWindow: WindowState = {
-      id: itemId, 
+      id: itemId,
       title: windowTitle,
       children: content,
       isOpen: true,
@@ -100,7 +100,7 @@ export default function HomePage() {
     setWindows(prev => [...prev, newWindow]);
     setActiveWindowId(itemId);
     setNextZIndex(prev => prev + 1);
-    setIsStartMenuOpen(false); 
+    setIsStartMenuOpen(false);
   }, [windows, nextZIndex, router]);
 
 
@@ -127,7 +127,7 @@ export default function HomePage() {
 
   const toggleStartMenu = () => {
     setIsStartMenuOpen(prev => !prev);
-    if (!isStartMenuOpen) setSelectedDesktopIconId(null); 
+    if (!isStartMenuOpen) setSelectedDesktopIconId(null);
   };
 
   const handleDesktopClick = () => {
@@ -170,8 +170,6 @@ export default function HomePage() {
 
   return (
     <div className="h-screen w-screen bg-background text-foreground overflow-hidden flex flex-col relative" onClick={handleDesktopClick}>
-      
-      <AnimatedFace /> {/* Render self-contained AnimatedFace */}
 
       {/* Desktop Area */}
       <main className="flex-grow relative p-4" style={{height: 'calc(100vh - 40px)'}}>
