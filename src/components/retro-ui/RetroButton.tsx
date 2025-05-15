@@ -1,6 +1,8 @@
+
 "use client";
 import { cn } from "@/lib/utils";
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode, MouseEvent } from "react";
+import { useClickSound } from "@/hooks/useClickSound";
 
 interface RetroButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -8,7 +10,16 @@ interface RetroButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean; // For toggle buttons like taskbar items
 }
 
-export function RetroButton({ children, className, active = false, ...props }: RetroButtonProps) {
+export function RetroButton({ children, className, active = false, onClick, ...props }: RetroButtonProps) {
+  const playClickSound = useClickSound();
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    playClickSound();
+    if (onClick) {
+      onClick(event);
+    }
+  };
+  
   return (
     <button
       className={cn(
@@ -17,6 +28,7 @@ export function RetroButton({ children, className, active = false, ...props }: R
         "active:translate-x-px active:translate-y-px", // Slight press effect
         className
       )}
+      onClick={handleClick}
       {...props}
     >
       {children}
