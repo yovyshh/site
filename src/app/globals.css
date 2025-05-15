@@ -2,148 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: var(--font-vt323), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  overflow: hidden; /* Prevent scrollbars on the body, desktop is fixed */
-}
-
 @layer base {
   :root {
-    --background: 220 25% 10%; /* Dark Blue/Gray desktop background */
-    --foreground: 220 15% 85%; /* Light Gray text */
+    --background: 0 0% 100%; /* Pure White */
+    --foreground: 240 10% 3.9%; /* Very Dark Gray / Near Black */
 
-    --card: 220 20% 18%; /* Dark window body */
-    --card-foreground: 220 15% 85%; /* Light text on dark window */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 240 10% 3.9%;
 
-    --popover: 220 20% 18%;
-    --popover-foreground: 220 15% 85%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
 
-    --primary: 180 100% 25%; /* Teal */
-    --primary-foreground: 0 0% 100%; /* White text on Teal */
+    --primary: 210 90% 55%; /* Vibrant Blue */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 15% 30%; /* Lighter elements, inactive buttons */
-    --secondary-foreground: 220 15% 85%;
+    --secondary: 240 4.8% 95.9%; /* Very Light Gray */
+    --secondary-foreground: 240 5.9% 10%; /* Dark Gray */
 
-    --muted: 220 15% 25%; /* Borders, less prominent elements */
-    --muted-foreground: 220 15% 65%; /* Muted text */
-    
-    --accent: 180 70% 35%; /* Teal variant for other interactive elements */
-    --accent-foreground: 180 70% 90%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%; /* Medium Gray */
+
+    --accent: 200 95% 50%; /* Bright Cyan/Blue */
+    --accent-foreground: 0 0% 100%; /* White */
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 40%; /* Default border color */
-    --input: 220 15% 22%;
-    --ring: 180 80% 45%; /* Teal for focus rings */
+    --border: 240 5.9% 90%; /* Light Gray */
+    --input: 0 0% 100%; /* White, relies on border for visibility */
+    --ring: 210 90% 65%; /* Primary color variant for focus rings */
 
-    --radius: 0rem; /* Sharp corners */
+    --radius: 0.5rem; /* Rounded corners for modern look */
 
-    /* Windows 98 specific colors for 3D effects */
-    --btn-highlight: 220 10% 90%; /* Light border for 3D effect */
-    --btn-shadow: 220 10% 30%;    /* Dark border for 3D effect */
-    --win-bg: 0 0% 75%; /* Classic C0C0C0 gray for non-dark elements if needed */
-    --win-text: 0 0% 0%;  /* Black text for classic gray elements */
-
-    /* Chart colors (can be kept or updated if charts are used) */
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    /* Chart colors */
+    --chart-1: 210 90% 50%;
+    --chart-2: 160 70% 45%;
+    --chart-3: 30 90% 55%;
+    --chart-4: 280 80% 60%;
+    --chart-5: 0 0% 40%;
   }
 
   .dark {
-    /* Assuming dark theme is default, .dark class might not be strictly necessary for these vars
-       but good practice if theme toggling was a feature. For now, these are the same. */
-    --background: 220 25% 10%;
-    --foreground: 220 15% 85%;
+    --background: 240 10% 3.9%; /* Very Dark Blue/Gray */
+    --foreground: 0 0% 98%; /* Near White */
 
-    --card: 220 20% 18%;
-    --card-foreground: 220 15% 85%;
+    --card: 240 10% 7%; /* Slightly lighter than background */
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 20% 18%;
-    --popover-foreground: 220 15% 85%;
+    --popover: 240 10% 7%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 180 100% 25%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 210 90% 58%; /* Vibrant Blue - can be same or slightly adjusted for dark */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 15% 30%;
-    --secondary-foreground: 220 15% 85%;
+    --secondary: 240 3.7% 15.9%; /* Dark Gray */
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 25%;
-    --muted-foreground: 220 15% 65%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%; /* Lighter Gray for muted text */
 
-    --accent: 180 70% 35%;
-    --accent-foreground: 180 70% 90%;
+    --accent: 200 95% 55%; /* Bright Cyan/Blue - can be same or slightly adjusted */
+    --accent-foreground: 0 0% 100%; /* White */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 40%;
-    --input: 220 15% 22%;
-    --ring: 180 80% 45%;
-    
-    --btn-highlight: 220 10% 40%; /* Dark theme 3D highlight */
-    --btn-shadow: 220 25% 5%;     /* Dark theme 3D shadow */
+    --border: 240 3.7% 25%; /* Darker border */
+    --input: 240 3.7% 18%; /* Dark input background */
+    --ring: 210 90% 58%;
+
+    /* Chart colors for dark theme */
+    --chart-1: 210 80% 60%;
+    --chart-2: 160 60% 55%;
+    --chart-3: 30 80% 65%;
+    --chart-4: 280 70% 70%;
+    --chart-5: 0 0% 70%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border; /* Default border color for elements */
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-    font-smooth: never;
-    -webkit-font-smoothing: none;
-    image-rendering: pixelated; /* For pixel art if any */
+    font-feature-settings: "rlig" 1, "calt" 1; /* Enable ligatures */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  ::selection {
-    background-color: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
+   ::selection {
+    @apply bg-primary/80 text-primary-foreground;
   }
 }
 
-/* Custom class for Win98 style 3D bevel borders */
-.bevel-light {
-  border-style: solid;
-  border-width: 2px;
-  border-top-color: hsl(var(--btn-highlight));
-  border-left-color: hsl(var(--btn-highlight));
-  border-bottom-color: hsl(var(--btn-shadow));
-  border-right-color: hsl(var(--btn-shadow));
+/* Wave SVG Color */
+.wave-svg-color {
+  fill: hsl(var(--primary) / 0.1); /* Example: translucent primary color */
+}
+.dark .wave-svg-color {
+  fill: hsl(var(--primary) / 0.05); /* Even more subtle in dark mode */
 }
 
-.bevel-inset-light {
-  border-style: solid;
-  border-width: 2px;
-  border-top-color: hsl(var(--btn-shadow));
-  border-left-color: hsl(var(--btn-shadow));
-  border-bottom-color: hsl(var(--btn-highlight));
-  border-right-color: hsl(var(--btn-highlight));
+/* Custom scrollbar (optional, for a more modern touch) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
-/* For dark theme buttons/elements if they are lighter than background */
-.bevel-dark {
-   border-style: solid;
-  border-width: 2px;
-  border-top-color: hsl(var(--secondary)); /* Lighter part */
-  border-left-color: hsl(var(--secondary));
-  border-bottom-color: black; /* Darker part */
-  border-right-color: black;
+::-webkit-scrollbar-track {
+  @apply bg-secondary/50;
 }
-.bevel-inset-dark {
-  border-style: solid;
-  border-width: 2px;
-  border-top-color: black; 
-  border-left-color: black;
-  border-bottom-color: hsl(var(--secondary));
-  border-right-color: hsl(var(--secondary));
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/70 rounded-full;
 }
-
-.busy-cursor {
-  cursor: wait !important;
-}
-.default-cursor {
-  cursor: default !important;
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary;
 }
